@@ -41,7 +41,10 @@ func copyRecursive(src, dst string) error {
 			copyRecursive(filepath.Join(src, file.Name()), dst)
 			continue
 		}
-		err = copyFileToDirectory(src, dst)
+		err = copyFileToDirectory(
+			filepath.Join(src, file.Name()),
+			dst,
+		)
 		if err != nil {
 			return err
 		}
