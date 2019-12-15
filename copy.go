@@ -37,12 +37,18 @@ func copyRecursive(src, dst string) error {
 		return err
 	}
 	for _, file := range files {
+		filePath := filepath.Join(src, file.Name())
 		if file.IsDir() {
-			copyRecursive(filepath.Join(src, file.Name()), dst)
+			dstPath := filepath.Join(dst, file.Name())
+			err = os.Mkdir(dstPath, directoryPermission)
+			if err != nil {
+				return err
+			}
+			copyRecursive(filePath, dstPath)
 			continue
 		}
 		err = copyFileToDirectory(
-			filepath.Join(src, file.Name()),
+			filePath,
 			dst,
 		)
 		if err != nil {
