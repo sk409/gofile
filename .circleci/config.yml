@@ -4,7 +4,6 @@ jobs:
     docker:
       - image: circleci/golang:1.13.4
     working_directory: /go/src/github.com/sk409/gofile
-
     steps:
       - checkout
       - run: go get github.com/onsi/ginkgo

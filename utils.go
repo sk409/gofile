@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 )
 
+
 func WalkFileTree(current string, callback func(string, os.FileInfo)) error {
 	currentFileInfo, err := os.Stat(current)
 	if err != nil {
