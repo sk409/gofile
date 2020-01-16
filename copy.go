@@ -3,6 +3,7 @@ package gofile
 import (
 	"errors"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 )
@@ -84,6 +85,7 @@ func copyFileToFile(src, dst string) error {
 		return err
 	}
 	defer srcFile.Close()
+	log.Println(IsExist(dst))
 	if !IsExist(dst) {
 		file, err := os.Create(dst)
 		if err != nil {
