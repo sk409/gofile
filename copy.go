@@ -84,6 +84,13 @@ func copyFileToFile(src, dst string) error {
 		return err
 	}
 	defer srcFile.Close()
+	if !IsExist(dst) {
+		file, err := os.Create(dst)
+		if err != nil {
+			return err
+		}
+		file.Close()
+	}
 	dstFile, err := os.Open(dst)
 	if err != nil {
 		return err
