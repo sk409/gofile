@@ -80,6 +80,7 @@ func copyFileToDirectory(src, dst string) error {
 }
 
 func copyFileToFile(src, dst string) error {
+	log.Println("copyFileToFile")
 	srcFile, err := os.Open(src)
 	if err != nil {
 		return err
