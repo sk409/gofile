@@ -25,7 +25,7 @@ func Copy(src, dst string) error {
 	} else if !srcFile.IsDir() && dstFile.IsDir() {
 		return copyFileToDirectory(src, dst)
 	} else if !srcFile.IsDir() && !dstFile.IsDir() {
-		return copyFileToFile(src, dst)
+		return CopyFileToFile(src, dst)
 	} else {
 		return CannotCopyDirectoryToFileError
 	}
@@ -78,12 +78,19 @@ func copyFileToDirectory(src, dst string) error {
 	return err
 }
 
-func copyFileToFile(src, dst string) error {
+func CopyFileToFile(src, dst string) error {
 	srcFile, err := os.Open(src)
 	if err != nil {
 		return err
 	}
 	defer srcFile.Close()
+	if !IsExist(dst) {
+		file, err := os.Create(dst)
+		if err != nil {
+			return err
+		}
+		file.Close()
+	}
 	dstFile, err := os.Open(dst)
 	if err != nil {
 		return err
