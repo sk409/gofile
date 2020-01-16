@@ -3,7 +3,6 @@ package gofile
 import (
 	"errors"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 )
@@ -21,8 +20,6 @@ func Copy(src, dst string) error {
 	if os.IsNotExist(err) {
 		return err
 	}
-	log.Println(srcFile.IsDir())
-	log.Println(dstFile.IsDir())
 	if srcFile.IsDir() && dstFile.IsDir() {
 		return copyRecursive(src, dst)
 	} else if !srcFile.IsDir() && dstFile.IsDir() {
@@ -87,14 +84,6 @@ func copyFileToFile(src, dst string) error {
 		return err
 	}
 	defer srcFile.Close()
-	log.Println(IsExist(dst))
-	if !IsExist(dst) {
-		file, err := os.Create(dst)
-		if err != nil {
-			return err
-		}
-		file.Close()
-	}
 	dstFile, err := os.Open(dst)
 	if err != nil {
 		return err
