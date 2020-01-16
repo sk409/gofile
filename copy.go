@@ -91,7 +91,7 @@ func CopyFileToFile(src, dst string) error {
 		}
 		file.Close()
 	}
-	dstFile, err := os.Open(dst)
+	dstFile, err := os.OpenFile(dst, os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
