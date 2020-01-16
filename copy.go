@@ -21,6 +21,8 @@ func Copy(src, dst string) error {
 	if os.IsNotExist(err) {
 		return err
 	}
+	log.Println(srcFile.IsDir())
+	log.Println(dstFile.IsDir())
 	if srcFile.IsDir() && dstFile.IsDir() {
 		return copyRecursive(src, dst)
 	} else if !srcFile.IsDir() && dstFile.IsDir() {
@@ -80,7 +82,6 @@ func copyFileToDirectory(src, dst string) error {
 }
 
 func copyFileToFile(src, dst string) error {
-	log.Println("copyFileToFile")
 	srcFile, err := os.Open(src)
 	if err != nil {
 		return err
